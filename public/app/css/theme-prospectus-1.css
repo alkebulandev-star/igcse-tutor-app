@@ -1,0 +1,1521 @@
+/* ════════════════════════════════════════════════════════════════════════
+   LESSON TEACHER — PROSPECTUS THEME OVERRIDE (v1)
+   ────────────────────────────────────────────────────────────────────────
+   Applies the British-prospectus design language (Lora + Inter,
+   navy + cream + gold) to every app page outside #pg-landing.
+
+   Scoped under .page (i.e. pg-beta, pg-classroom, pg-exam, pg-kids,
+   pg-arena, pg-parent, pg-languages, pg-essay, pg-homework, pg-guidance)
+   without touching #pg-landing (which has its own scoped .lt4 styles).
+
+   Internal class names of the working engine are preserved — this file
+   ONLY re-paints chrome (backgrounds, headings, buttons, borders, links)
+   while leaving event handlers, IDs and structural CSS intact.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300..800&display=swap');
+
+:root{
+  --pp-navy:#142028;
+  --pp-navy-d:#0b141a;
+  --pp-cream:#f7f4ec;
+  --pp-cream-2:#efeadc;
+  --pp-cream-3:#e3dcc5;
+  --pp-gold:#264e36;
+  --pp-gold-d:#1a3a26;
+  --pp-gold-l:#3a6b4f;
+  --pp-green:#264e36;
+  --pp-ink:#161616;
+  --pp-muted:#666666;
+  --pp-line:#d8d2bf;
+  --pp-serif:'Lora','Source Serif Pro','Times New Roman',serif;
+  --pp-sans:'Inter','Plus Jakarta Sans',system-ui,sans-serif;
+}
+
+/* ─── Apply only to app pages, never to #pg-landing ─────────────── */
+.page:not(#pg-landing){
+  font-family: var(--pp-sans);
+  color: var(--pp-ink);
+}
+
+.page:not(#pg-landing) h1,
+.page:not(#pg-landing) h2,
+.page:not(#pg-landing) h3,
+.page:not(#pg-landing) h4{
+  font-family: var(--pp-serif);
+  font-weight: 400;
+  letter-spacing: -.012em;
+  color: var(--pp-navy);
+}
+
+/* ────────────── pg-beta (entry / level picker) ────────────── */
+#pg-beta{ background: var(--pp-cream) !important; }
+#pg-beta .beta-pg{ background: var(--pp-cream) !important; }
+#pg-beta .beta-card{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 30px 80px rgba(10,31,77,.08) !important;
+}
+#pg-beta .name-field,
+#pg-beta input[type=text],
+#pg-beta input[type=email]{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-size: 1.1rem !important;
+  border-radius: 4px !important;
+  padding: 14px 18px !important;
+}
+#pg-beta .name-field:focus,
+#pg-beta input:focus{
+  border-color: var(--pp-gold) !important;
+  outline: 2px solid rgba(201,169,97,.2) !important;
+  outline-offset: 0 !important;
+}
+
+#pg-beta .step-label{
+  font-family: var(--pp-sans) !important;
+  font-size: .72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  color: var(--pp-gold-d) !important;
+}
+
+#pg-beta .bs-num{
+  background: var(--pp-cream-2) !important;
+  color: var(--pp-navy) !important;
+  border: 1.5px solid var(--pp-line) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+}
+#pg-beta .bs-step.active .bs-num,
+#pg-beta .bs-step.done .bs-num{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-color: var(--pp-navy) !important;
+}
+#pg-beta .bs-step span{
+  font-family: var(--pp-sans) !important;
+  font-size: .82rem !important;
+  font-weight: 500 !important;
+  color: var(--pp-muted) !important;
+}
+#pg-beta .bs-step.active span{ color: var(--pp-navy) !important; font-weight: 600 !important; }
+
+#pg-beta .lvl-btn{
+  background: var(--pp-cream) !important;
+  border: 1.5px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  border-radius: 4px !important;
+  padding: 30px 24px !important;
+  transition: border-color .2s, transform .12s !important;
+}
+#pg-beta .lvl-btn:hover{
+  border-color: var(--pp-gold) !important;
+  transform: translateY(-2px);
+}
+#pg-beta .lvl-btn.sel{
+  border-color: var(--pp-navy) !important;
+  background: #fff !important;
+  box-shadow: 0 14px 32px rgba(10,31,77,.12) !important;
+}
+#pg-beta .lvl-btn h4{
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+  color: var(--pp-navy) !important;
+}
+#pg-beta .lvl-btn p{
+  font-family: var(--pp-sans) !important;
+  font-size: .84rem !important;
+  color: var(--pp-muted) !important;
+}
+#pg-beta .lvl-ico{
+  background: linear-gradient(135deg,var(--pp-cream-2),var(--pp-cream-3)) !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+}
+#pg-beta .lvl-btn.sel .lvl-ico{
+  background: var(--pp-gold) !important;
+}
+
+#pg-beta .cls-btn{
+  background: var(--pp-cream-2) !important;
+  border: 1.5px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  border-radius: 4px !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+}
+#pg-beta .cls-btn.sel{
+  background: var(--pp-navy) !important;
+  border-color: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+
+#pg-beta .wp-term-btn,
+#pg-beta .wp-week{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+  border-radius: 4px !important;
+}
+#pg-beta .wp-term-btn.sel,
+#pg-beta .wp-week.sel{
+  background: var(--pp-gold) !important;
+  border-color: var(--pp-gold-d) !important;
+  color: var(--pp-navy) !important;
+  font-weight: 700 !important;
+}
+
+#pg-beta .strm-btn{
+  background: var(--pp-cream) !important;
+  border: 1.5px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+}
+#pg-beta .strm-btn:hover{ border-color: var(--pp-gold) !important; }
+#pg-beta .strm-btn.sel{
+  border-color: var(--pp-navy) !important;
+  background: #fff !important;
+  box-shadow: 0 10px 24px rgba(10,31,77,.10) !important;
+}
+
+#pg-beta .enter-btn,
+#pg-beta button[onclick*="enterCL"],
+#pg-beta .price-btn-main{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  font-size: .88rem !important;
+  padding: 16px 32px !important;
+}
+#pg-beta .enter-btn:hover{ background: var(--pp-navy-d) !important; }
+
+/* ────────────── pg-classroom (lesson player) ────────────── */
+#pg-classroom{
+  background: var(--pp-cream) !important;
+  --cl-bg: var(--pp-cream);
+  --cl-surface: #fff;
+  --cl-sidebar: var(--pp-cream-2);
+  --cl-border: var(--pp-line);
+  --cl-text: var(--pp-navy);
+  --cl-text-dim: var(--pp-muted);
+  --cl-muted: var(--pp-muted);
+  --cl-card: #fff;
+  --cl-accent: var(--pp-gold-d);
+}
+#pg-classroom .cl-topbar,
+#pg-classroom .cl-header{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-bottom: 1px solid rgba(201,169,97,.18) !important;
+}
+#pg-classroom .cl-sidebar{
+  background: var(--pp-cream-2) !important;
+  border-right: 1px solid var(--pp-line) !important;
+}
+#pg-classroom .cl-side-item,
+#pg-classroom .cl-sb-item{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+}
+#pg-classroom .cl-side-item.on,
+#pg-classroom .cl-sb-item.on{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+#pg-classroom .lesson-card,
+#pg-classroom .topic-card,
+#pg-classroom .step-card{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+}
+
+/* ────────────── pg-exam (exam centre) ────────────── */
+#pg-exam{ background: var(--pp-cream) !important; }
+#pg-exam .ec-top,
+#pg-exam #ecTopTitle{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-bottom: 1px solid rgba(201,169,97,.18) !important;
+  font-family: var(--pp-serif) !important;
+}
+#pg-exam .ec-board-card{
+  background: #fff !important;
+  border: 1.5px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+  transition: border-color .2s, transform .15s !important;
+}
+#pg-exam .ec-board-card:hover{
+  border-color: var(--pp-gold) !important;
+  transform: translateY(-3px);
+  background: #fff !important;
+}
+#pg-exam .ec-board-card.ec-board-igcse:hover{
+  border-color: var(--pp-navy) !important;
+  background: #fff !important;
+}
+#pg-exam .ec-board-name{
+  font-family: var(--pp-serif) !important;
+  color: var(--pp-navy) !important;
+  font-weight: 500 !important;
+}
+#pg-exam .ec-board-full{
+  font-family: var(--pp-sans) !important;
+  color: var(--pp-muted) !important;
+}
+#pg-exam .ec-board-badge{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  font-size: .68rem !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+#pg-exam .ec-board-pill{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+}
+#pg-exam .ec-step-title{
+  font-family: var(--pp-serif) !important;
+  color: var(--pp-navy) !important;
+  font-weight: 400 !important;
+}
+#pg-exam .ec-step-sub{
+  font-family: var(--pp-sans) !important;
+  color: var(--pp-muted) !important;
+}
+#pg-exam .ec-subj-card,
+#pg-exam .ec-paper-card{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+}
+#pg-exam .ec-subj-card:hover,
+#pg-exam .ec-paper-card:hover{
+  border-color: var(--pp-gold) !important;
+}
+
+/* ────────────── pg-kids (Kids Zone) ────────────── */
+#pg-kids{ background: var(--pp-cream) !important; }
+#pg-kids .kz-header,
+#pg-kids .kz-topbar{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+#pg-kids .kz-sidebar{
+  background: var(--pp-cream-2) !important;
+  border-right: 1px solid var(--pp-line) !important;
+}
+#pg-kids .kz-sb-item{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+}
+#pg-kids .kz-sb-item.on{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+#pg-kids .kz-cat-tab{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+}
+#pg-kids .kz-cat-tab.on{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-color: var(--pp-navy) !important;
+}
+#pg-kids .kz-word{
+  font-family: var(--pp-serif) !important;
+  color: var(--pp-gold-d) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  font-size: 3rem !important;
+}
+#pg-kids .kz-photo-frame,
+#pg-kids .kz-photo-wrap{
+  border: 4px solid #fff !important;
+  border-radius: 4px !important;
+  box-shadow: 0 24px 56px rgba(10,31,77,.14), 0 0 0 1px var(--pp-line) !important;
+}
+#pg-kids .kz-letter-tile{
+  background: var(--pp-cream-2) !important;
+  border: 1.5px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+}
+
+/* ────────────── pg-arena (Live Arena) ────────────── */
+#pg-arena{ background: var(--pp-cream) !important; }
+#pg-arena .ar-topbar,
+#pg-arena .ar-header{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+#pg-arena .ar-game-card,
+#pg-arena .ar-feat-card{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+}
+#pg-arena .ar-game-card:hover{
+  border-color: var(--pp-gold) !important;
+}
+#pg-arena .ar-game-card .gc-name,
+#pg-arena .ar-feat-card .fc-title{
+  font-family: var(--pp-serif) !important;
+  color: var(--pp-navy) !important;
+  font-weight: 500 !important;
+}
+#pg-arena .ar-game-card .gc-desc,
+#pg-arena .ar-feat-card .fc-sub{
+  font-family: var(--pp-sans) !important;
+  color: var(--pp-muted) !important;
+}
+#pg-arena .ar-game-card .gc-play,
+#pg-arena .ar-feat-card .fc-play{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-radius: 0 !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+/* ────────────── pg-parent (Parent Hub) ────────────── */
+#pg-parent{ background: var(--pp-cream) !important; }
+#pg-parent .ph-topbar,
+#pg-parent .ph-header{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  font-family: var(--pp-serif) !important;
+}
+#pg-parent .ph-card,
+#pg-parent .ph-section{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 6px 18px rgba(10,31,77,.04) !important;
+}
+#pg-parent .ph-card h2,
+#pg-parent .ph-card h3{
+  font-family: var(--pp-serif) !important;
+  color: var(--pp-navy) !important;
+  font-weight: 500 !important;
+}
+#pg-parent .ph-input{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+  border-radius: 2px !important;
+}
+#pg-parent .ph-input:focus{
+  border-color: var(--pp-gold) !important;
+  outline: 2px solid rgba(201,169,97,.2) !important;
+  outline-offset: 0 !important;
+}
+#pg-parent .ph-btn,
+#pg-parent button.ph-btn{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  font-size: .82rem !important;
+  padding: 12px 22px !important;
+}
+#pg-parent .ph-btn:hover{ background: var(--pp-navy-d) !important; }
+
+/* ────────────── Universal page chrome ────────────── */
+.page:not(#pg-landing) .nav-back,
+.page:not(#pg-landing) .back-btn,
+.page:not(#pg-landing) .ec-back-btn{
+  background: var(--pp-cream-2) !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  border-radius: 2px !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 500 !important;
+}
+
+/* Top notification bar (Beta strip) — make it look part of the brochure */
+#__ltLogoFoot, .footer{ display: none !important; }
+
+/* Floating Auto Teacher pill */
+.lt-auto-teacher,
+[class*="auto-teacher"]{
+  font-family: var(--pp-sans) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 1 — Visibility fixes for elements that still inherit the
+   old dark-theme inline styles. These were invisible on the cream
+   prospectus background. Each rule keeps the original layout intact
+   and ONLY re-paints text + background.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── Stream picker (Year 10–13 → Choose your stream) ──────────── */
+#pg-beta .stream-btn{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+  color: var(--pp-navy) !important;
+  padding: 22px 20px !important;
+  transition: border-color .2s, background .2s, transform .15s !important;
+  box-shadow: none !important;
+}
+#pg-beta .stream-btn:hover{
+  background: var(--pp-cream-2) !important;
+  border-color: var(--pp-gold) !important;
+  transform: translateY(-2px) !important;
+}
+#pg-beta .stream-btn.sel,
+#pg-beta .stream-btn[aria-pressed="true"]{
+  background: var(--pp-navy) !important;
+  border-color: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+/* Force readable colours on the three inline divs each stream-btn
+   contains: emoji icon, title, description. */
+#pg-beta .stream-btn > div{ color: inherit !important; }
+#pg-beta .stream-btn > div:nth-child(1){ font-size: 1.5rem !important; margin-bottom: 10px !important; }
+#pg-beta .stream-btn > div:nth-child(2){
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+  font-size: 1.15rem !important;
+  margin-bottom: 6px !important;
+}
+#pg-beta .stream-btn.sel > div:nth-child(2),
+#pg-beta .stream-btn[aria-pressed="true"] > div:nth-child(2){ color: var(--pp-cream) !important; }
+#pg-beta .stream-btn > div:nth-child(3){
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 400 !important;
+  font-size: .82rem !important;
+  line-height: 1.5 !important;
+}
+#pg-beta .stream-btn.sel > div:nth-child(3),
+#pg-beta .stream-btn[aria-pressed="true"] > div:nth-child(3){ color: rgba(251,248,241,.78) !important; }
+
+/* Stream-picker section: title + description visible */
+#pg-beta #stepStream .step-label{ color: var(--pp-gold-d) !important; }
+#pg-beta #stepStream p{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+}
+
+/* ── Welcome / classroom stat tiles ────────────────────────────── */
+#pg-classroom .wc-stat{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+#pg-classroom .wc-stat-val{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+}
+#pg-classroom .wc-stat-lbl{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 500 !important;
+}
+#pg-classroom .wc-greet,
+#pg-classroom .wc-greet-name,
+#pg-classroom .wc-name{
+  color: var(--pp-navy) !important;
+}
+
+/* ── Exam Centre paper picker (Step 2) ─────────────────────────── */
+#pg-exam .ec-paper-card{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  color: var(--pp-navy) !important;
+  padding: 28px !important;
+}
+#pg-exam .ec-paper-card *{ color: inherit !important; }
+#pg-exam .ec-paper-card .ec-paper-title,
+#pg-exam .ec-paper-card h3,
+#pg-exam .ec-paper-card h4{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 400 !important;
+}
+#pg-exam .ec-paper-card .ec-paper-sub,
+#pg-exam .ec-paper-card p{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+}
+#pg-exam .ec-paper-card .ec-paper-go,
+#pg-exam .ec-paper-card .ec-paper-cta{
+  color: var(--pp-gold-d) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+#pg-exam .ec-paper-card:hover{
+  background: var(--pp-cream-2) !important;
+  border-color: var(--pp-gold) !important;
+}
+#pg-exam .ec-paper-card:hover .ec-paper-go{ color: var(--pp-navy) !important; }
+
+/* Year-focus chips at the bottom of paper-picker */
+#pg-exam .ec-year-chip{
+  background: #fff !important;
+  color: var(--pp-navy) !important;
+  border: 1px solid var(--pp-line) !important;
+}
+#pg-exam .ec-year-chip.on,
+#pg-exam .ec-year-chip[data-on="true"]{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-color: var(--pp-navy) !important;
+}
+
+/* ── Classroom sidebar (uses sb-* classes, NOT cl-sb-*) ────────── */
+#pg-classroom .sidebar{
+  background: var(--pp-cream-2) !important;
+  border-right: 1px solid var(--pp-line) !important;
+}
+#pg-classroom .sb-top-bar{
+  background: var(--pp-cream-2) !important;
+  border-bottom: 1px solid var(--pp-line) !important;
+}
+#pg-classroom .sb-user,
+#pg-classroom .sb-user-info{ color: var(--pp-navy) !important; }
+#pg-classroom .sb-avt{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+#pg-classroom .sb-un{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 500 !important;
+}
+#pg-classroom .sb-ul{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 500 !important;
+}
+#pg-classroom .sb-xp{
+  color: var(--pp-gold-d) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 700 !important;
+}
+#pg-classroom .sb-back-btn,
+#pg-classroom .sb-back-label{
+  color: var(--pp-navy) !important;
+  background: transparent !important;
+  border: 1px solid var(--pp-line) !important;
+}
+#pg-classroom .sb-back-btn:hover{
+  background: var(--pp-cream-3) !important;
+  color: var(--pp-navy) !important;
+}
+#pg-classroom .sb-close-mobile{ color: var(--pp-muted) !important; }
+
+/* Accordion sections */
+#pg-classroom .sb-acc-header{
+  color: var(--pp-navy) !important;
+  border-bottom: 1px solid var(--pp-line) !important;
+  background: transparent !important;
+}
+#pg-classroom .sb-acc-header:hover{ background: rgba(201,169,97,.08) !important; }
+#pg-classroom .sb-acc-ico{ color: var(--pp-navy) !important; }
+#pg-classroom .sb-acc-title{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  font-size: .76rem !important;
+}
+#pg-classroom .sb-acc-arrow{ color: var(--pp-muted) !important; }
+#pg-classroom .sb-acc-body,
+#pg-classroom .sb-topics-body{ color: var(--pp-navy) !important; }
+#pg-classroom .sb-empty-msg{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+  font-style: italic !important;
+}
+
+/* Sidebar list items (subjects + topics) */
+#pg-classroom .sb-sub-item,
+#pg-classroom .sb-topic-item,
+#pg-classroom .sb-acc-body a,
+#pg-classroom .sb-acc-body button,
+#pg-classroom .sb-acc-body > div > div{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-sans) !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+}
+#pg-classroom .sb-sub-item:hover,
+#pg-classroom .sb-topic-item:hover{
+  background: var(--pp-cream-3) !important;
+  color: var(--pp-navy) !important;
+}
+#pg-classroom .sb-sub-item.on,
+#pg-classroom .sb-topic-item.on,
+#pg-classroom .sb-sub-item.active,
+#pg-classroom .sb-topic-item.active{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+}
+
+/* Top bar of the classroom page */
+#pg-classroom .topbar,
+#pg-classroom .cl-topbar{
+  background: var(--pp-navy) !important;
+  color: var(--pp-cream) !important;
+  border-bottom: 1px solid var(--pp-gold) !important;
+}
+#pg-classroom .topbar *,
+#pg-classroom .cl-topbar *{ color: inherit !important; }
+#pg-classroom .topbar-home-btn,
+#pg-classroom .home-btn{
+  background: rgba(251,248,241,.12) !important;
+  color: var(--pp-cream) !important;
+  border: 1px solid rgba(251,248,241,.25) !important;
+}
+#pg-classroom .topbar-home-btn:hover,
+#pg-classroom .home-btn:hover{
+  background: var(--pp-gold) !important;
+  color: var(--pp-navy) !important;
+  border-color: var(--pp-gold) !important;
+}
+
+/* ── Subject grid card text ────────────────────────────────────── */
+.cl-sj-name{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-weight: 400 !important;
+}
+.cl-sj-meta,.cl-sj-cls{
+  color: var(--pp-muted) !important;
+  font-family: var(--pp-sans) !important;
+}
+
+/* ── Beta level cards (Step 1) — ensure dark sublabel readable ── */
+#pg-beta .lvl-btn p{ color: var(--pp-muted) !important; }
+#pg-beta .lvl-btn h4{ color: var(--pp-navy) !important; }
+
+/* ── Auth dropdown / form fields visible on cream ──────────────── */
+.lt-auth-card,
+.lt-auth-modal{
+  background: #fff !important;
+  color: var(--pp-navy) !important;
+}
+
+/* ── Comprehensive mobile + tablet responsive ──────────────────── */
+@media (max-width: 880px){
+  #pg-beta .beta-card{ padding: 26px 22px !important; }
+  #pg-beta #stepStream > div:last-child{ grid-template-columns: 1fr !important; }
+  #pg-classroom .wc-stats{ grid-template-columns: repeat(2, 1fr) !important; }
+  #pg-exam .ec-paper-grid{ grid-template-columns: 1fr !important; gap: 14px !important; }
+  #pg-exam .ec-board-grid{ grid-template-columns: 1fr !important; gap: 14px !important; }
+  #pg-exam .ec-subj-grid{ grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  /* Keep cl-body as row on mobile so .lesson-panel keeps its flex:1 height.
+     The sidebar is fixed-position on mobile (slides in via .mob-open) so it
+     doesn't participate in the row flex anyway. Forcing column here would
+     collapse .lesson-panel to 0px height — and the subject grid with it. */
+}
+@media (max-width: 560px){
+  #pg-exam .ec-subj-grid{ grid-template-columns: 1fr !important; }
+  #pg-classroom .wc-stats{ grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
+  #pg-beta .beta-card{ padding: 22px 18px !important; border-radius: 12px !important; }
+  #pg-beta .stream-btn{ padding: 18px 16px !important; }
+  #pg-beta .stream-btn > div:nth-child(2){ font-size: 1.02rem !important; }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7 — Lesson presentation: remap dark-theme inline colours so all
+   text reads on the cream prospectus background. The lesson code uses
+   rgba(255,255,255,.X) in many places (originally a dark theme). On
+   cream, those colours vanish. Force every white-translucent text to a
+   navy equivalent of equal contrast.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-classroom [style*="color:rgba(255,255,255"],
+#pg-classroom [style*="color: rgba(255, 255, 255"],
+#pg-classroom [style*="color:rgba(255,255,255,0"],
+#pg-exam      [style*="color:rgba(255,255,255"],
+#pg-exam      [style*="color: rgba(255, 255, 255"],
+#pg-languages [style*="color:rgba(255,255,255"],
+#pg-kids      [style*="color:rgba(255,255,255"],
+#pg-parent    [style*="color:rgba(255,255,255"]{
+  color: var(--pp-navy) !important;
+}
+/* Slightly muted variant (used in second-line/descriptions) — keep readable */
+#pg-classroom [style*="color:rgba(255,255,255,.5"],
+#pg-classroom [style*="color:rgba(255,255,255,.4"],
+#pg-classroom [style*="color:rgba(255,255,255,.3"],
+#pg-classroom [style*="color:rgba(255,255,255,.2"],
+#pg-exam      [style*="color:rgba(255,255,255,.5"],
+#pg-exam      [style*="color:rgba(255,255,255,.4"],
+#pg-exam      [style*="color:rgba(255,255,255,.3"],
+#pg-exam      [style*="color:rgba(255,255,255,.2"],
+#pg-languages [style*="color:rgba(255,255,255,.5"],
+#pg-languages [style*="color:rgba(255,255,255,.4"],
+#pg-kids      [style*="color:rgba(255,255,255,.5"],
+#pg-kids      [style*="color:rgba(255,255,255,.4"],
+#pg-parent    [style*="color:rgba(255,255,255,.5"],
+#pg-parent    [style*="color:rgba(255,255,255,.4"]{
+  color: #5b6370 !important;
+}
+/* White-on-white backgrounds — give them a cream tint so cards are visible */
+#pg-classroom [style*="background:rgba(255,255,255,.0"],
+#pg-classroom [style*="background:rgba(255,255,255,.1"],
+#pg-exam      [style*="background:rgba(255,255,255,.0"],
+#pg-exam      [style*="background:rgba(255,255,255,.1"]{
+  background: var(--pp-cream-2) !important;
+}
+/* Light coloured strong tags (yellow/blue on dark) need swapping */
+#pg-classroom [style*="color:#fbbf24"]:not(.lt-mascot *):not(svg *),
+#pg-classroom [style*="color:#93c5fd"],
+#pg-classroom [style*="color:#a78bfa"],
+#pg-classroom [style*="color:#4ade80"],
+#pg-exam      [style*="color:#fbbf24"]:not(svg *),
+#pg-exam      [style*="color:#93c5fd"]{
+  color: var(--pp-navy) !important;
+}
+/* The blue-tint loader spinners on cream lesson screens become invisible —
+   force a high-contrast navy spinner. */
+#pg-classroom .lt-loading .ld-dot,
+#pg-exam .lt-loading .ld-dot,
+#pg-languages .lt-loading .ld-dot{
+  background: var(--pp-navy) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7J — Theory question panel: close affordance
+   On phones the question panel covers the whole screen with no obvious
+   way to dismiss it. Add a visible ✕ close in the header and a
+   "← Back to writing" button at the bottom of the panel.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-essay .theory-question-col .tqc-header{
+  display:flex !important; align-items:flex-start; gap:10px;
+  padding:14px 16px !important;
+  border-bottom:1px solid var(--pp-line, #d8d2bf) !important;
+  background:#fff !important;
+  position:sticky; top:0; z-index:3;
+}
+#pg-essay .theory-question-col .tqc-header-text{ flex:1; min-width:0; }
+#pg-essay .theory-question-col .tqc-close{
+  flex-shrink:0;
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid var(--pp-line, #d8d2bf);
+  background:#fff; color:var(--pp-navy, #142028);
+  font:700 1rem var(--pp-sans, system-ui);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, color .15s, border-color .15s;
+}
+#pg-essay .theory-question-col .tqc-close:hover{
+  background:#264e36; color:#fbf8f1; border-color:#264e36;
+}
+#pg-essay .theory-question-col .tqc-foot{
+  padding:12px 16px;
+  border-top:1px solid var(--pp-line, #d8d2bf);
+  background:#fdfaf2;
+  flex-shrink:0;
+  display:flex; justify-content:flex-end;
+}
+#pg-essay .theory-question-col .tqc-back-btn{
+  background:#264e36; color:#fbf8f1;
+  border:none; padding:9px 18px;
+  border-radius:100px;
+  font:700 .86rem var(--pp-sans, system-ui);
+  cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
+}
+#pg-essay .theory-question-col .tqc-back-btn:hover{
+  background:#1f3a2a;
+}
+/* On phones, the question panel slides over the writing area like a
+   bottom sheet so closing it doesn't shift everything. */
+@media (max-width: 820px){
+  #pg-essay .theory-question-col{
+    position:fixed !important;
+    inset:auto 0 0 0 !important;
+    width:100% !important;
+    max-height:78vh !important;
+    border-radius:18px 18px 0 0 !important;
+    border-right:0 !important;
+    border-top:1px solid var(--pp-line, #d8d2bf) !important;
+    background:#fbf8f1 !important;
+    box-shadow:0 -24px 60px rgba(15,23,42,.32) !important;
+    z-index:200 !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  /* When toggleQuestionPanel hides the col with display:none, that wins —
+     respect it. */
+  #pg-essay .theory-question-col[style*="display: none"],
+  #pg-essay .theory-question-col[style*="display:none"]{
+    display:none !important;
+  }
+}
+html.dark-mode #pg-essay .theory-question-col{ background:#0d1117 !important; }
+html.dark-mode #pg-essay .theory-question-col .tqc-header{ background:#131922 !important; border-bottom-color:rgba(255,255,255,.10) !important; }
+html.dark-mode #pg-essay .theory-question-col .tqc-close{ background:#131922; color:#e8edf2; border-color:rgba(255,255,255,.14); }
+html.dark-mode #pg-essay .theory-question-col .tqc-foot{ background:#0d1117 !important; border-top-color:rgba(255,255,255,.10) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7I — Theory writing toolbar: compact mobile redesign
+   The student was buried under 7 rows of toolbar before reaching the
+   writing sheet. On phones (<=820px) we hide the heavy toolbar + toolkit
+   bar and replace them with a single sticky compact strip:
+       [Question ▾]  [parts (a)(b)(c)]  [🛠 Tools]  [💡 Suggest]
+   "🛠 Tools" opens a categorised bottom-sheet popover with every tool
+   from the old toolbar (Format, Math, Blocks, Subject) — one tap reach.
+   The writing sheet always stays the dominant element.
+   ════════════════════════════════════════════════════════════════════ */
+@media (max-width: 820px){
+  /* Hide the noisy multi-row toolbar + the subject-toolkit strip on phones */
+  #pg-essay .theory-toolbar-v2{ display:none !important; }
+  #pg-essay #theoryToolkitBar{ display:none !important; }
+  /* Compact strip stays sticky at the top of the answer pane */
+  #pg-essay .lt-mini-toolbar{
+    display:flex !important;
+    align-items:center;
+    gap:6px;
+    padding:6px 10px;
+    background:#fff !important;
+    border-bottom:1px solid var(--pp-line,#d8d2bf) !important;
+    position:sticky; top:0; z-index:5;
+    overflow-x:auto;
+    flex-shrink:0;
+    scrollbar-width:none;
+  }
+  #pg-essay .lt-mini-toolbar::-webkit-scrollbar{display:none}
+  #pg-essay .lt-mini-toolbar .lmt-btn{
+    background:#fdfaf2; color:var(--pp-navy,#142028);
+    border:1px solid var(--pp-line,#d8d2bf);
+    padding:6px 10px; border-radius:100px;
+    font:600 .82rem/1 var(--pp-sans,system-ui);
+    cursor:pointer; flex-shrink:0;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  #pg-essay .lt-mini-toolbar .lmt-btn:hover,
+  #pg-essay .lt-mini-toolbar .lmt-btn.on{
+    background:#264e36; color:#fbf8f1; border-color:#264e36;
+  }
+  #pg-essay .lt-mini-toolbar .lmt-tools{ font-weight:700; }
+  /* Hide the Add answer block bar on mobile — accessible via Tools sheet */
+  #pg-essay .tap-add-bar{ display:none !important; }
+  /* Make the writing sheet take 60vh on mobile */
+  #pg-essay .tap-content,
+  #pg-essay .tap-content-booklet{ min-height:60vh !important; }
+}
+/* Desktop: hide the mini toolbar */
+@media (min-width: 821px){
+  #pg-essay .lt-mini-toolbar{ display:none !important; }
+}
+/* ─── Tools bottom-sheet (mobile only, but works everywhere) ─── */
+.lt-tools-sheet{
+  position:fixed; left:0; right:0; bottom:0; z-index:2147483646;
+  background:#fbf8f1;
+  border-top:1px solid var(--pp-line,#d8d2bf);
+  border-radius:18px 18px 0 0;
+  box-shadow:0 -24px 60px rgba(15,23,42,.25);
+  font-family:var(--pp-sans,system-ui);
+  color:var(--pp-navy,#142028);
+  max-height:65vh;
+  display:flex; flex-direction:column;
+  transform:translateY(100%);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.lt-tools-sheet.open{ transform:translateY(0); }
+.lt-tools-sheet-hdr{
+  display:flex; align-items:center; gap:10px;
+  padding:14px 18px; border-bottom:1px solid var(--pp-line,#d8d2bf);
+}
+.lt-tools-sheet-hdr h3{
+  margin:0; font-family:var(--pp-serif,Georgia,serif); font-weight:500; font-size:1.1rem;
+}
+.lt-tools-sheet-hdr h3 small{ display:block; font-size:.7rem; color:#5b6370; font-weight:600; letter-spacing:.04em; margin-top:2px; }
+.lt-tools-sheet-hdr .lt-close{
+  margin-left:auto; background:transparent; border:1px solid var(--pp-line,#d8d2bf);
+  color:var(--pp-navy,#142028); padding:6px 14px; border-radius:100px;
+  font:700 .82rem var(--pp-sans,system-ui); cursor:pointer;
+}
+.lt-tools-sheet-body{ flex:1; overflow-y:auto; padding:14px 18px 24px; }
+.lt-tools-section{ margin-bottom:18px; }
+.lt-tools-section h4{
+  margin:0 0 8px; font-size:.7rem; font-weight:800;
+  letter-spacing:.1em; text-transform:uppercase; color:#264e36;
+}
+.lt-tools-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:8px;
+}
+.lt-tools-grid button{
+  background:#fff; border:1px solid var(--pp-line,#d8d2bf);
+  color:var(--pp-navy,#142028);
+  padding:10px 8px; border-radius:8px;
+  font:600 .78rem var(--pp-sans,system-ui);
+  cursor:pointer; text-align:center;
+  display:flex; flex-direction:column; gap:4px; align-items:center;
+  line-height:1.2;
+}
+.lt-tools-grid button:hover{ background:#264e36; color:#fbf8f1; border-color:#264e36; }
+.lt-tools-grid .ico{ font-size:1.2rem; }
+.lt-tools-backdrop{
+  position:fixed; inset:0; background:rgba(15,23,42,.4);
+  z-index:2147483645; opacity:0; transition:opacity .25s;
+  pointer-events:none;
+}
+.lt-tools-backdrop.open{ opacity:1; pointer-events:auto; }
+html.dark-mode .lt-tools-sheet{ background:#0d1117; color:#e8edf2; border-top-color:rgba(255,255,255,.10); }
+html.dark-mode .lt-tools-grid button{ background:#131922; color:#e8edf2; border-color:rgba(255,255,255,.10); }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7G — Theory writing screen: SHEET PROMINENCE
+   The student couldn't even see the writable paper because of (a) a tall
+   toolbar, (b) the rough-work textarea hogging vertical space and (c) the
+   answer textarea defaulting to only 140 px. Force the writing sheet to
+   be the dominant element on the screen.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-essay .theory-wrap{ background: var(--pp-cream, #fbf8f1) !important; }
+#pg-essay .theory-answer-pane{
+  background: #fdfaf2 !important;
+  border-top: 1px solid var(--pp-line, #d8d2bf);
+}
+#pg-essay .tap-header-booklet{
+  background: #fff !important;
+  border-bottom: 1px solid var(--pp-line, #d8d2bf) !important;
+  padding: 10px 14px !important;
+}
+#pg-essay .tap-partlabel{ color: var(--pp-navy, #142028) !important; }
+#pg-essay .tap-booklet-sub{ color: #8a5a14 !important; }
+#pg-essay .tap-wordcount{
+  background: #fdf5e2 !important;
+  border: 1px solid #e0c97a !important;
+  color: #6b4513 !important;
+  font-weight: 700 !important;
+}
+/* Rough work / planning starts COLLAPSED so the writing sheet is visible
+   from the start. Toggleable via a small chip if we ever wire it. */
+#pg-essay .tap-plan{
+  max-height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+}
+#pg-essay .tap-plan.tap-plan-open{
+  max-height: 180px !important;
+  padding: 10px 14px !important;
+  border-bottom: 1px dashed var(--pp-line, #d8d2bf) !important;
+}
+/* The writable area — make it the visual focal point. Big ruled paper. */
+#pg-essay .tap-content,
+#pg-essay .tap-content-booklet{
+  flex: 1 !important;
+  min-height: 320px !important;
+  padding: 18px 18px 18px 50px !important;
+  background:
+    linear-gradient(transparent, transparent),
+    repeating-linear-gradient(
+      transparent 0,
+      transparent 29px,
+      rgba(38,78,54,.22) 29px,
+      rgba(38,78,54,.22) 30px
+    ) !important;
+  background-color: #fdfaf2 !important;
+  position: relative !important;
+}
+#pg-essay .tap-content::before,
+#pg-essay .tap-content-booklet::before{
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 38px;
+  width: 2px;
+  background: #b91c1c;
+  opacity: .35;
+}
+/* Each answer block is a clean card on the ruled paper */
+#pg-essay .theory-booklet .answer-block{
+  background: rgba(255,255,255,.65) !important;
+  border: 1px solid rgba(38,78,54,.18) !important;
+  border-radius: 4px !important;
+  margin-bottom: 14px !important;
+}
+#pg-essay .theory-booklet .ab-textarea{
+  min-height: 240px !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--pp-navy, #142028) !important;
+  font-family: Georgia, serif !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  padding: 12px 14px !important;
+}
+#pg-essay .theory-booklet .ab-textarea::placeholder{
+  color: rgba(20,32,40,.42) !important;
+}
+/* Add-block bar — readable + clearly labelled */
+#pg-essay .tap-add-bar{
+  background: #fff !important;
+  border-top: 1px solid var(--pp-line, #d8d2bf) !important;
+  padding: 10px 14px !important;
+}
+#pg-essay .tap-add-bar .tap-add-lbl{
+  color: #5b6370 !important;
+  font-weight: 700 !important;
+  font-size: .78rem !important;
+}
+#pg-essay .tap-add-bar .tap-add-btn{
+  background: #fdfaf2 !important;
+  border: 1px solid var(--pp-line, #d8d2bf) !important;
+  color: var(--pp-navy, #142028) !important;
+  font-weight: 600 !important;
+}
+#pg-essay .tap-add-bar .tap-add-btn:hover{
+  background: #264e36 !important;
+  color: #fbf8f1 !important;
+  border-color: #264e36 !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7H — Auto Teacher pill: SMALL but noticeable
+   It was a full-width "Auto Teacher" label that dominated the bottom of
+   every screen. Shrink to a tidy circular mascot button — the label only
+   appears on hover/open and the mascot itself stays as the visual anchor.
+   ════════════════════════════════════════════════════════════════════ */
+.lt-mascot-fab{
+  padding: 4px !important;
+  background: #fff !important;
+  border: 1px solid rgba(38,78,54,.22) !important;
+  box-shadow: 0 8px 22px rgba(15,23,42,.16), 0 1px 3px rgba(15,23,42,.06) !important;
+  gap: 0 !important;
+  font-size: 0 !important;
+  border-radius: 100px !important;
+}
+.lt-mascot-fab .lt-fab-grip{
+  border-right: 0 !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  width: 14px !important;
+  gap: 2px !important;
+}
+.lt-mascot-fab .lt-fab-grip span{ width: 9px !important; height: 1.4px !important; }
+.lt-mascot-fab > .lt-mascot{
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0 !important;
+  padding: 2px !important;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+  box-shadow: inset 0 0 0 1px rgba(38,78,54,.2) !important;
+}
+.lt-mascot-fab > span:not(.lt-fab-grip):not(.lt-fab-dot){
+  /* Label hidden by default; appears on hover */
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width .28s cubic-bezier(.4,0,.2,1), padding .28s;
+  font-size: .82rem !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  color: var(--pp-navy, #142028) !important;
+  font-family: var(--pp-sans, system-ui) !important;
+}
+.lt-mascot-fab:hover > span:not(.lt-fab-grip):not(.lt-fab-dot),
+.lt-mascot-fab:focus-within > span:not(.lt-fab-grip):not(.lt-fab-dot){
+  max-width: 200px;
+  padding: 0 10px 0 8px !important;
+}
+.lt-mascot-fab .lt-fab-dot{
+  width: 7px !important;
+  height: 7px !important;
+  margin: 0 6px 0 0 !important;
+}
+html.dark-mode .lt-mascot-fab{ background: #131922 !important; border-color: rgba(255,255,255,.14) !important; }
+html.dark-mode .lt-mascot-fab > span:not(.lt-fab-grip):not(.lt-fab-dot){ color: #e8edf2 !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7F — Essay rules screen container backgrounds
+   .essay-rules-screen / .erc-topbar / .erc-mode-bar / .erc-rules-col
+   all use dark-theme rgba colours that survive on cream because the
+   prospectus override only re-themes #pg-classroom. Extend the same
+   palette to #pg-essay.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-essay{
+  --cl-bg: var(--pp-cream, #fbf8f1);
+  --cl-surface: #fff;
+  --cl-border: var(--pp-line, #d8d2bf);
+  --cl-text: var(--pp-navy, #142028);
+}
+#pg-essay .essay-rules-screen{ background: var(--pp-cream, #fbf8f1) !important; color: var(--pp-navy, #142028) !important; }
+#pg-essay .erc-topbar{ background: var(--pp-navy, #142028) !important; border-bottom-color: rgba(201,169,97,.2) !important; }
+#pg-essay .erc-topbar-back{ background: rgba(251,248,241,.08) !important; color: rgba(251,248,241,.7) !important; border-color: rgba(251,248,241,.2) !important; }
+#pg-essay .erc-topbar-back:hover{ background: rgba(251,248,241,.15) !important; color: #fff !important; }
+#pg-essay .erc-topbar-title{ color: #fbf8f1 !important; font-family: var(--pp-serif, Georgia, serif) !important; font-weight: 500 !important; }
+#pg-essay .erc-topbar-sub{ color: rgba(251,248,241,.55) !important; }
+#pg-essay .erc-mode-bar{ background: #fff !important; border-bottom-color: var(--pp-line, #d8d2bf) !important; color: var(--pp-navy) !important; }
+#pg-essay .erc-rules-col, #pg-essay .erc-rules-col *{ color: var(--pp-navy, #142028) !important; }
+#pg-essay .erc-rules-col{ background: #fdfaf2 !important; border-right-color: var(--pp-line, #d8d2bf) !important; }
+#pg-essay .erc-body{ background: var(--pp-cream, #fbf8f1) !important; }
+#pg-essay .erc-footer{ background: #fdfaf2 !important; border-top-color: var(--pp-line, #d8d2bf) !important; }
+#pg-essay .erc-agree-label{ color: var(--pp-navy, #142028) !important; }
+html.dark-mode #pg-essay{ --cl-bg: #0d1117; --cl-surface: #131922; --cl-border: rgba(255,255,255,.10); --cl-text: #e8edf2; }
+html.dark-mode #pg-essay .essay-rules-screen{ background: #0d1117 !important; color: #e8edf2 !important; }
+html.dark-mode #pg-essay .erc-mode-bar{ background: rgba(0,0,0,.15) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7E — Essay / Theory paper picker
+   The .erc-topic-btn cards are styled for the dark theme — translucent
+   white text on near-black backgrounds. On cream they vanish. Repaint
+   them as proper white cards with navy text, plus a clean "Fresh paper"
+   row and a selected-state highlight.
+   ════════════════════════════════════════════════════════════════════ */
+.erc-topic-btn{
+  background: #fff !important;
+  border: 1px solid var(--pp-line, #d8d2bf) !important;
+  color: var(--pp-navy, #142028) !important;
+}
+.erc-topic-btn:hover,
+.erc-topic-btn.sel{
+  background: #f0f6f2 !important;
+  border-color: #264e36 !important;
+  box-shadow: 0 4px 14px rgba(38,78,54,.10) !important;
+}
+.erc-topic-btn .erc-topic-type{
+  color: #8a5a14 !important; font-weight: 800 !important;
+}
+.erc-topic-btn .erc-topic-text{
+  color: var(--pp-navy, #142028) !important;
+  font-weight: 500;
+}
+.erc-topic-btn .erc-topic-type span{
+  background: #fdf5e2 !important; color: #8a5a14 !important; border-color: #e0c97a !important;
+}
+.erc-topics-hdr{ color: #264e36 !important; font-weight: 800 !important; }
+.erc-agree-label{ color: var(--pp-navy, #142028) !important; }
+.erc-rules-col, .erc-topics-col, .erc-footer{ background: transparent !important; }
+.erc-start-btn{
+  background: #264e36 !important;
+  color: #fbf8f1 !important;
+  font-family: var(--pp-sans, system-ui) !important;
+}
+.erc-start-btn:not(:disabled):hover{ background: #1f3a2a !important; }
+/* The "Fresh paper / Generate" AI row injected by exam-gen-wiring */
+.exg-ai-row{
+  background: linear-gradient(135deg, #fdf5e2, #f0e9d0) !important;
+  border: 1px solid #e0c97a !important;
+  color: var(--pp-navy, #142028) !important;
+}
+.exg-ai-row > div > div:first-child{ color: #6b4513 !important; }
+.exg-ai-row > div > div:nth-child(2){ color: #3a4250 !important; }
+.exg-ai-btn{
+  background: #264e36 !important;
+  color: #fbf8f1 !important;
+}
+.exg-ai-btn:hover{ background: #1f3a2a !important; }
+/* Dark mode keeps the original look */
+html.dark-mode .erc-topic-btn{ background: rgba(255,255,255,.04) !important; border-color: rgba(255,255,255,.09) !important; color: rgba(255,255,255,.85) !important; }
+html.dark-mode .erc-topic-btn .erc-topic-text{ color: rgba(255,255,255,.72) !important; }
+html.dark-mode .erc-topic-btn .erc-topic-type{ color: rgba(255,255,255,.5) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7D — Welcome screen + timetable + AI strip contrast
+   .wc-ai-title, .wc-tt-title, .tt-desc, .tt-toggle-btn, .wc-ai-toggle
+   all hard-code rgba(255,255,255,.X) colours from the dark theme. On
+   cream these turn invisible. Repaint navy + readable buttons.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-classroom .wc-ai-title,
+#pg-classroom .wc-tt-title{
+  color: var(--pp-navy, #142028) !important;
+  font-weight: 700 !important;
+}
+#pg-classroom .tt-desc,
+#pg-classroom .wc-ai-body,
+#pg-classroom .wc-tt-card .tt-body{
+  color: #3a4250 !important;
+}
+#pg-classroom .tt-toggle-btn,
+#pg-classroom .wc-ai-toggle,
+#pg-classroom .wc-action-btn{
+  background: #fff !important;
+  color: #264e36 !important;
+  border: 1.5px solid #264e36 !important;
+  font-weight: 700 !important;
+}
+#pg-classroom .tt-toggle-btn:hover,
+#pg-classroom .wc-ai-toggle:hover,
+#pg-classroom .wc-action-btn:hover{
+  background: #264e36 !important;
+  color: #fbf8f1 !important;
+}
+#pg-classroom .tt-save-btn{
+  background: #264e36 !important;
+  color: #fbf8f1 !important;
+  border: none !important;
+  font-weight: 800 !important;
+}
+#pg-classroom .tt-skip-btn{
+  background: transparent !important;
+  color: #5b6370 !important;
+  border: 1px solid var(--pp-line, #d8d2bf) !important;
+}
+#pg-classroom .wc-tt-card,
+#pg-classroom .wc-ai-strip{
+  background: #fff !important;
+  border: 1px solid var(--pp-line, #d8d2bf) !important;
+  border-radius: 8px !important;
+}
+/* Dark mode: keep originals */
+html.dark-mode #pg-classroom .wc-ai-title,
+html.dark-mode #pg-classroom .wc-tt-title{ color: rgba(255,255,255,.85) !important; }
+html.dark-mode #pg-classroom .tt-toggle-btn,
+html.dark-mode #pg-classroom .wc-ai-toggle,
+html.dark-mode #pg-classroom .wc-action-btn{ background: rgba(255,255,255,.08) !important; color: #fbf8f1 !important; border-color: rgba(255,255,255,.15) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7C — Sidebar legibility on cream
+   The classroom sidebar items (.sb-item, .sb-acc-title, .sb-acc-arrow,
+   .sb-empty-msg, .sb-prog, .sb-un, .sb-ul) all hard-coded white-
+   translucent text colours from the old dark theme. On the cream
+   prospectus background they were near-invisible. Force readable navy
+   tones across every sidebar text element.
+   ════════════════════════════════════════════════════════════════════ */
+.cl-sidebar .sb-item,
+#pg-classroom .sb-item{
+  color: var(--pp-navy, #142028) !important;
+  font-weight: 600 !important;
+}
+.cl-sidebar .sb-item:hover,
+#pg-classroom .sb-item:hover{
+  background: var(--pp-cream-2, #efeadc) !important;
+  color: var(--pp-navy-d, #0b141a) !important;
+}
+.cl-sidebar .sb-item.on,
+#pg-classroom .sb-item.on{
+  background: var(--pp-navy, #142028) !important;
+  color: var(--pp-cream, #fbf8f1) !important;
+  border-left-color: #264e36 !important;
+}
+.cl-sidebar .sb-acc-title,
+#pg-classroom .sb-acc-title{ color: #264e36 !important; font-weight: 800 !important; }
+.cl-sidebar .sb-acc-arrow,
+#pg-classroom .sb-acc-arrow{ color: #264e36 !important; }
+.cl-sidebar .sb-acc-header:hover,
+#pg-classroom .sb-acc-header:hover{ background: var(--pp-cream-2, #efeadc) !important; }
+.cl-sidebar .sb-accordion,
+#pg-classroom .sb-accordion{ border-bottom-color: var(--pp-line, #d8d2bf) !important; }
+.cl-sidebar .sb-empty-msg,
+#pg-classroom .sb-empty-msg{ color: #5b6370 !important; }
+.cl-sidebar .sb-un,
+#pg-classroom .sb-un{ color: var(--pp-navy, #142028) !important; }
+.cl-sidebar .sb-ul,
+#pg-classroom .sb-ul{ color: #5b6370 !important; }
+.cl-sidebar .sb-item .sb-prog,
+#pg-classroom .sb-item .sb-prog{ color: #5b6370 !important; }
+/* Catch-all: any sidebar descendant that still has hard-coded
+   rgba(255,255,255,...) text gets a readable navy substitute. */
+.cl-sidebar [style*="color:rgba(255,255,255"],
+#pg-classroom .cl-sidebar [style*="color:rgba(255,255,255"]{
+  color: var(--pp-navy, #142028) !important;
+}
+/* Dark mode keeps the original white-translucent palette */
+html.dark-mode .cl-sidebar .sb-item{ color: rgba(255,255,255,.78) !important; font-weight: 500 !important; }
+html.dark-mode .cl-sidebar .sb-item:hover{ background: rgba(255,255,255,.08) !important; }
+html.dark-mode .cl-sidebar .sb-acc-title{ color: rgba(255,255,255,.55) !important; }
+html.dark-mode .cl-sidebar .sb-acc-arrow{ color: rgba(255,255,255,.55) !important; }
+html.dark-mode .cl-sidebar .sb-empty-msg{ color: rgba(255,255,255,.5) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7A — DARK MODE
+   When the user toggles to dark mode via the 🌙 button, html gets the
+   .dark-mode class. These rules restore a clean dark look across the
+   whole app, overriding the prospectus cream theme above with !important.
+   Variables are flipped on the root so all derived colours follow.
+   ════════════════════════════════════════════════════════════════════ */
+html.dark-mode{
+  --pp-cream:   #0d1117 !important;
+  --pp-cream-2: #131922 !important;
+  --pp-cream-3: #1c2533 !important;
+  --pp-navy:    #e8edf2 !important;
+  --pp-navy-d:  #f4f6f9 !important;
+  --pp-muted:   #94a3b8 !important;
+  --pp-line:    rgba(255,255,255,.10) !important;
+  --pp-gold-d:  #3ea668 !important;
+  background: #0d1117 !important;
+  color: #e8edf2 !important;
+}
+html.dark-mode body{ background: #0d1117 !important; color: #e8edf2 !important; }
+html.dark-mode #pg-classroom,
+html.dark-mode #pg-exam,
+html.dark-mode #pg-langs,
+html.dark-mode #pg-languages,
+html.dark-mode #pg-kids,
+html.dark-mode #pg-parent,
+html.dark-mode #pg-arena,
+html.dark-mode #pg-beta,
+html.dark-mode #pg-landing{
+  background: #0d1117 !important;
+  color: #e8edf2 !important;
+  --cl-bg: #0d1117 !important;
+  --cl-surface: #131922 !important;
+  --cl-sidebar: #0a0f15 !important;
+  --cl-border: rgba(255,255,255,.10) !important;
+  --cl-text: #e8edf2 !important;
+  --cl-text-dim: #94a3b8 !important;
+  --cl-muted: #64748b !important;
+  --cl-card: #131922 !important;
+  --cl-accent: #4ade80 !important;
+}
+html.dark-mode .cl-topbar,
+html.dark-mode .cl-header{ background:#06090d !important; color:#e8edf2 !important; border-color:rgba(255,255,255,.08) !important; }
+html.dark-mode .cl-sidebar{ background:#0a0f15 !important; border-color:rgba(255,255,255,.08) !important; }
+html.dark-mode .lesson-card,
+html.dark-mode .topic-card,
+html.dark-mode .step-card,
+html.dark-mode .ec-board-card,
+html.dark-mode .ec-paper-card,
+html.dark-mode .lt4-feat-card{ background:#131922 !important; border-color:rgba(255,255,255,.10) !important; color:#e8edf2 !important; }
+/* Dark mode neutralises the inline white-text remap from PATCH 7 — let
+   those colours stay white again. */
+html.dark-mode #pg-classroom [style*="color:rgba(255,255,255"],
+html.dark-mode #pg-exam      [style*="color:rgba(255,255,255"],
+html.dark-mode #pg-languages [style*="color:rgba(255,255,255"]{ color:rgba(255,255,255,.75) !important; }
+/* Dark mode for callouts — soft tints on dark background */
+html.dark-mode .expl-analogy{ background:rgba(251,191,36,.08) !important; border-color:rgba(251,191,36,.32) !important; border-left-color:#fbbf24 !important; }
+html.dark-mode .expl-analogy p{ color:#fde68a !important; }
+html.dark-mode .expl-analogy .analogy-tag{ color:#fbbf24 !important; }
+html.dark-mode .callout-info{ background:rgba(59,130,246,.10) !important; border-left-color:#60a5fa !important; }
+html.dark-mode .callout-info .callout-label{ color:#60a5fa !important; }
+html.dark-mode .callout-warning{ background:rgba(245,158,11,.10) !important; border-left-color:#fbbf24 !important; }
+html.dark-mode .callout-warning .callout-label{ color:#fbbf24 !important; }
+html.dark-mode .callout-success{ background:rgba(34,197,94,.10) !important; border-left-color:#4ade80 !important; }
+html.dark-mode .callout-success .callout-label{ color:#4ade80 !important; }
+html.dark-mode .callout-uk{ background:rgba(1,33,105,.20) !important; border-left-color:#93c5fd !important; }
+html.dark-mode .callout-uk .callout-label{ color:#93c5fd !important; }
+html.dark-mode .callout-body{ color:rgba(255,255,255,.78) !important; }
+/* Mascot avatar background flips in dark mode */
+html.dark-mode .wc-avt, html.dark-mode .lt-speech-avt, html.dark-mode .lt-intro-avt,
+html.dark-mode .lt-mini-avt, html.dark-mode .kz-tutor-avatar{
+  background: linear-gradient(135deg, #131922, #1c2533) !important;
+  box-shadow: inset 0 0 0 1.5px rgba(74,222,128,.25), 0 4px 12px rgba(0,0,0,.4) !important;
+}
+html.dark-mode .lt-mascot-fab{ background:#131922 !important; color:#e8edf2 !important; border-color:rgba(255,255,255,.10) !important; }
+html.dark-mode .lt-mascot-fab .lt-mascot{ background:linear-gradient(135deg,#1f2a36,#243043) !important; box-shadow:inset 0 0 0 1.5px rgba(74,222,128,.30) !important; }
+html.dark-mode .lt-mascot-fab .lt-fab-grip{ border-right-color:rgba(255,255,255,.10) !important; }
+html.dark-mode .lt-mascot-fab .lt-fab-grip span{ background:rgba(255,255,255,.45) !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 7B — Lesson callouts (British Analogy, Info, Warning, Success)
+   Original colours were translucent yellow/blue/green on a dark theme;
+   on cream they vanish. Repaint each callout with a solid pale tint
+   background, a bold coloured border, and high-contrast navy body text.
+   ════════════════════════════════════════════════════════════════════ */
+#pg-classroom .expl-analogy,
+.expl-analogy{
+  background: #fdf5e2 !important;
+  border: 1px solid #e0c97a !important;
+  border-left: 4px solid #b88a2e !important;
+  border-radius: 8px !important;
+  padding: 14px 18px !important;
+}
+#pg-classroom .expl-analogy .analogy-tag,
+.expl-analogy .analogy-tag{
+  color: #8a5a14 !important;
+  font-weight: 800 !important;
+  font-family: var(--pp-sans) !important;
+  letter-spacing: .08em !important;
+  font-size: .68rem !important;
+  margin-bottom: 8px !important;
+}
+#pg-classroom .expl-analogy p,
+.expl-analogy p{
+  color: var(--pp-navy) !important;
+  font-family: var(--pp-serif) !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+.expl-analogy strong{ color: #6b4513 !important; font-weight: 700 !important; }
+
+#pg-classroom .expl-callout,
+.expl-callout{
+  background: #fff !important;
+  border: 1px solid var(--pp-line) !important;
+  border-left-width: 4px !important;
+  border-radius: 6px !important;
+  padding: 14px 18px !important;
+}
+#pg-classroom .callout-body,
+.callout-body{ color: var(--pp-navy) !important; line-height: 1.7 !important; }
+#pg-classroom .callout-label,
+.callout-label{
+  font-weight: 800 !important; font-family: var(--pp-sans) !important;
+  letter-spacing: .08em !important; font-size: .68rem !important;
+  margin-bottom: 8px !important;
+}
+.callout-info     { border-left-color: #2a4d6e !important; background: #eef4fa !important; }
+.callout-info .callout-label{ color: #2a4d6e !important; }
+.callout-warning  { border-left-color: #b45309 !important; background: #fdf3e0 !important; }
+.callout-warning .callout-label{ color: #b45309 !important; }
+.callout-success  { border-left-color: #264e36 !important; background: #ebf3ed !important; }
+.callout-success .callout-label{ color: #264e36 !important; }
+.callout-uk       { border-left-color: #012169 !important; background: #eaf0fa !important; }
+.callout-uk .callout-label{ color: #012169 !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   PATCH 8 — Mascot avatar framing
+   Make every AI-tutor avatar circle big enough to display the mascot
+   properly, with a soft cream background + subtle ring so it reads
+   as an "avatar", not a flat emoji slot.
+   ════════════════════════════════════════════════════════════════════ */
+.wc-avt, .lt-speech-avt, .lt-intro-avt, .lt-mini-avt, .kz-tutor-avatar{
+  background: linear-gradient(135deg, #f6fbf7, #e9f5ed) !important;
+  box-shadow: inset 0 0 0 1.5px rgba(38,78,54,.18), 0 4px 12px rgba(38,78,54,.08) !important;
+  overflow: visible !important;
+  font-size: 0 !important; /* hide any stray text fragments */
+}
+.wc-avt{ width:56px !important; height:56px !important; }
+.lt-speech-avt{ width:46px !important; height:46px !important; }
+.lt-intro-avt{ width:50px !important; height:50px !important; }
+.lt-mini-avt{ width:34px !important; height:34px !important; }
+.kz-tutor-avatar{ width:64px !important; height:64px !important; }
+.wc-avt .lt-mascot, .lt-speech-avt .lt-mascot, .lt-intro-avt .lt-mascot,
+.lt-mini-avt .lt-mascot, .kz-tutor-avatar .lt-mascot{
+  width: 80% !important; height: 80% !important; margin: 0 !important;
+}
+
+/* Chat bubble name row — make the mascot inline with the name */
+.cmsg-nm{ display:flex !important; align-items:center !important; gap:8px !important; font-weight:700 !important; }
+.cmsg-nm .lt-mascot{ width:26px !important; height:26px !important; margin-right:0 !important; flex-shrink:0; }
+
+/* Bubble decoration on the AI message itself — soft halo ring on left edge */
+.cmsg.cmsg-lt > .cmsg-bub{
+  border-left: 3px solid #264e36 !important;
+  background: linear-gradient(180deg, #ffffff, #f8fbf9) !important;
+  box-shadow: 0 2px 14px rgba(15,23,42,.06) !important;
+}
+
+/* Auto-Teacher pill (now a mascot-fab) — drop the dark dev-tools look */
+#lt-srv-pill.lt-mascot-fab{ font-family: var(--pp-sans) !important; }
